@@ -1,7 +1,7 @@
 [project]
 name = "arche"
 version = "0.1.0"
-description = "CLI tool that explains lecture slides using Claude's vision API"
+description = "Explains lecture slides using Claude. For when you have the slides but not the lecture."
 readme = "README.md"
 license = "MIT"
 authors = [
@@ -30,6 +30,7 @@ Issues = "https://github.com/fadli0029/arche/issues"
 
 [project.scripts]
 arche = "arche:main"
+arche-extract = "arche.extract:_main"
 
 [build-system]
 requires = ["uv_build>=0.9.16,<0.10.0"]

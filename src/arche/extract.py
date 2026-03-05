@@ -131,5 +131,10 @@ def run_extract(argv: list[str] | None = None) -> int:
     return 0
 
 
-if __name__ == "__main__":
+def _main() -> None:
+    """Entry point for the arche-extract CLI."""
     sys.exit(run_extract())
+
+
+if __name__ == "__main__":
+    _main()

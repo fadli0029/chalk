@@ -1,6 +1,6 @@
 # arche
 
-When self-studying university courses (e.g. CMU 15-411, MIT 6.824), you often
+When self-studying university courses (e.g. CMU 15-411, MIT 6.1810), you often
 get lecture slides but no lecture videos. The slides alone are rarely
 self-contained: professors design them as visual aids for a spoken lecture, not
 as standalone reading material. So you scroll through a PDF, hit a slide you
@@ -30,11 +30,12 @@ This extracts pages 1 through the last requested page as PNGs, loads them
 into Claude's context, and explains the target slides with full awareness of
 everything that came before.
 
-To make `/slides` available globally (not just inside the arche project):
+To make `/slides` available, copy the bundled skill to your global Claude
+config:
 
 ```sh
 mkdir -p ~/.claude/skills/slides
-cp .claude/skills/slides/SKILL.md ~/.claude/skills/slides/SKILL.md
+cp skills/slides/SKILL.md ~/.claude/skills/slides/SKILL.md
 ```
 
 ### Standalone CLI
