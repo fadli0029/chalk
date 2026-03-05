@@ -75,13 +75,13 @@ chalk lecture.pdf 1-10 --max-tokens 16384
 Requires Python 3.12+.
 
 ```sh
-# From GitHub
-uv tool install git+https://github.com/fadli0029/chalk.git
+# From PyPI
+pip install chalk
+# or
+uv tool install chalk
 
-# Or from a local clone
-git clone https://github.com/fadli0029/chalk.git
-cd chalk
-uv tool install .
+# From source
+uv tool install git+https://github.com/fadli0029/chalk.git
 ```
 
 ## Development

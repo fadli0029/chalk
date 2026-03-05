@@ -113,9 +113,7 @@ def run_extract(argv: list[str] | None = None) -> int:
             sys.stderr.write(f"Error: cleanup path must be inside {tmp_root}\n")
             return 1
         if not resolved.name.startswith("chalk-slides-"):
-            sys.stderr.write(
-                "Error: cleanup path must be an chalk-slides-* directory\n"
-            )
+            sys.stderr.write("Error: cleanup path must be a chalk-slides-* directory\n")
             return 1
         try:
             shutil.rmtree(cleanup_dir)
