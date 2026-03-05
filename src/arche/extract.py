@@ -105,6 +105,18 @@ def run_extract(argv: list[str] | None = None) -> int:
 
     cleanup_dir: Path | None = args.cleanup
     if cleanup_dir is not None:
+        tmp_root = Path(tempfile.gettempdir())
+        try:
+            resolved = cleanup_dir.resolve()
+            resolved.relative_to(tmp_root)
+        except ValueError:
+            sys.stderr.write(f"Error: cleanup path must be inside {tmp_root}\n")
+            return 1
+        if not resolved.name.startswith("arche-slides-"):
+            sys.stderr.write(
+                "Error: cleanup path must be an arche-slides-* directory\n"
+            )
+            return 1
         try:
             shutil.rmtree(cleanup_dir)
         except Exception as exc:

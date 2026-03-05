@@ -2,18 +2,13 @@
 
 from __future__ import annotations
 
-import io
 import shutil
-import sys
-from typing import TYPE_CHECKING
+import tempfile
+from pathlib import Path
 
 import pytest
 
 from arche.extract import extract_to_dir, run_extract
-
-if TYPE_CHECKING:
-    from pathlib import Path
-
 
 PNG_MAGIC = b"\x89PNG\r\n\x1a\n"
 
@@ -58,43 +53,52 @@ class TestExtractToDir:
 class TestRunExtract:
     """Tests for run_extract() CLI wrapper."""
 
-    def test_success_with_output_dir(self, sample_pdf: Path, tmp_path: Path) -> None:
+    def test_success_with_output_dir(
+        self, sample_pdf: Path, tmp_path: Path, capsys: pytest.CaptureFixture[str]
+    ) -> None:
         out = tmp_path / "out"
-        captured = io.StringIO()
-        old_stdout = sys.stdout
-        sys.stdout = captured  # type: ignore[assignment]
-        try:
-            result = run_extract([str(sample_pdf), "1-2", "--output-dir", str(out)])
-        finally:
-            sys.stdout = old_stdout
-
+        result = run_extract([str(sample_pdf), "1-2", "--output-dir", str(out)])
         assert result == 0
-        lines = captured.getvalue().strip().split("\n")
+        captured = capsys.readouterr()
+        lines = captured.out.strip().split("\n")
         assert lines[0] == str(out)
         assert len(lines) == 3  # dir + 2 files
 
-    def test_success_temp_dir(self, sample_pdf: Path) -> None:
-        captured = io.StringIO()
-        old_stdout = sys.stdout
-        sys.stdout = captured  # type: ignore[assignment]
-        try:
-            result = run_extract([str(sample_pdf), "1"])
-        finally:
-            sys.stdout = old_stdout
-
+    def test_success_temp_dir(
+        self, sample_pdf: Path, capsys: pytest.CaptureFixture[str]
+    ) -> None:
+        result = run_extract([str(sample_pdf), "1"])
         assert result == 0
-        lines = captured.getvalue().strip().split("\n")
+        captured = capsys.readouterr()
+        lines = captured.out.strip().split("\n")
         assert "arche-slides-" in lines[0]
         shutil.rmtree(lines[0], ignore_errors=True)
 
-    def test_cleanup(self, tmp_path: Path, sample_pdf: Path) -> None:
-        target = tmp_path / "to_remove"
-        target.mkdir()
+    def test_cleanup(self, sample_pdf: Path) -> None:
+        target = Path(tempfile.mkdtemp(prefix="arche-slides-"))
         (target / "file.txt").write_text("data")
 
         result = run_extract([str(sample_pdf), "1", "--cleanup", str(target)])
         assert result == 0
         assert not target.exists()
+
+    def test_cleanup_rejects_arbitrary_path(
+        self, tmp_path: Path, sample_pdf: Path
+    ) -> None:
+        target = tmp_path / "to_remove"
+        target.mkdir()
+        result = run_extract([str(sample_pdf), "1", "--cleanup", str(target)])
+        assert result == 1
+        assert target.exists()
+
+    def test_cleanup_rejects_non_arche_temp_dir(self, sample_pdf: Path) -> None:
+        target = Path(tempfile.mkdtemp(prefix="other-"))
+        try:
+            result = run_extract([str(sample_pdf), "1", "--cleanup", str(target)])
+            assert result == 1
+            assert target.exists()
+        finally:
+            shutil.rmtree(target, ignore_errors=True)
 
     def test_error_missing_pdf(self, tmp_path: Path) -> None:
         result = run_extract([str(tmp_path / "nope.pdf"), "1"])
