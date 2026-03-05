@@ -1,0 +1,19 @@
+name: Smoke test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  smoke-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: astral-sh/setup-uv@v7
+        with:
+          python-version: "3.12"
+
+      - name: Install from PyPI and verify CLI
+        run: |
+          uv venv /tmp/smoke
+          uv pip install --python /tmp/smoke chalk-pypi
+          /tmp/smoke/bin/chalk --help
+          /tmp/smoke/bin/chalk-extract --help
