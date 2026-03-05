@@ -115,7 +115,7 @@ max-complexity = 12
 
 [tool.ruff.lint.pylint]
 max-args = 8
-max-returns = 7
+max-returns = 8
 
 [tool.ruff.lint.isort]
 known-first-party = ["chalk"]

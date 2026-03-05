@@ -30,8 +30,13 @@ This extracts pages 1 through the last requested page as PNGs, loads them
 into Claude's context, and explains the target slides with full awareness of
 everything that came before.
 
-To make `/slides` available, copy the bundled skill to your global Claude
-config:
+To make `/slides` available:
+
+```sh
+chalk --install-skill
+```
+
+Or, if working from a local clone:
 
 ```sh
 mkdir -p ~/.claude/skills/slides
