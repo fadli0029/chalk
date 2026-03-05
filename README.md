@@ -76,9 +76,9 @@ Requires Python 3.12+.
 
 ```sh
 # From PyPI
-pip install chalk
+pip install chalk-pypi
 # or
-uv tool install chalk
+uv tool install chalk-pypi
 
 # From source
 uv tool install git+https://github.com/fadli0029/chalk.git
