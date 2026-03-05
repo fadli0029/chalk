@@ -1,7 +1,7 @@
 ---
 description: Explain lecture slides from a PDF using the professor persona
 argument-hint: <pdf-path> <page-spec> [prompt]
-allowed-tools: Bash(arche-extract *), Read
+allowed-tools: Bash(chalk-extract *), Read
 ---
 
 # /slides — Explain Lecture Slides
@@ -30,7 +30,7 @@ IMPORTANT: The `<pdf-path>` from `$ARGUMENTS` may be relative. Before running ex
 Extract pages `1-<max_target_page>` to get both context and target slides in one call:
 
 ```bash
-arche-extract <absolute-pdf-path> 1-<max_target_page>
+chalk-extract <absolute-pdf-path> 1-<max_target_page>
 ```
 
 The first line of stdout is the temp directory path. Subsequent lines are the PNG file paths, one per line. Capture all of them.
@@ -85,7 +85,7 @@ If the user provided a custom prompt (third part of `$ARGUMENTS`), use it instea
 After the explanation is complete, remove the temp directory:
 
 ```bash
-arche-extract dummy 1 --cleanup <temp-dir>
+chalk-extract dummy 1 --cleanup <temp-dir>
 ```
 
 Replace `<temp-dir>` with the directory path captured in step 2.

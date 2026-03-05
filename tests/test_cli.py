@@ -1,4 +1,4 @@
-"""Tests for arche.cli module."""
+"""Tests for chalk.cli module."""
 
 from __future__ import annotations
 
@@ -10,7 +10,7 @@ import pytest
 if TYPE_CHECKING:
     from pathlib import Path
 
-from arche.cli import run
+from chalk.cli import run
 
 
 @pytest.fixture(autouse=True)
@@ -39,38 +39,38 @@ class TestRun:
         result = run([str(sample_pdf), "1"])
         assert result == 1
 
-    @patch("arche.cli.stream_explanation")
+    @patch("chalk.cli.stream_explanation")
     def test_success(self, mock_stream: MagicMock, sample_pdf: Path) -> None:
         result = run([str(sample_pdf), "1"])
         assert result == 0
         mock_stream.assert_called_once()
 
-    @patch("arche.cli.stream_explanation")
+    @patch("chalk.cli.stream_explanation")
     def test_success_range(self, mock_stream: MagicMock, sample_pdf: Path) -> None:
         result = run([str(sample_pdf), "1-3"])
         assert result == 0
         mock_stream.assert_called_once()
 
-    @patch("arche.cli.stream_explanation", side_effect=RuntimeError("API down"))
+    @patch("chalk.cli.stream_explanation", side_effect=RuntimeError("API down"))
     def test_api_error(self, mock_stream: MagicMock, sample_pdf: Path) -> None:
         result = run([str(sample_pdf), "1"])
         assert result == 2
 
-    @patch("arche.cli.stream_explanation")
+    @patch("chalk.cli.stream_explanation")
     def test_custom_model(self, mock_stream: MagicMock, sample_pdf: Path) -> None:
         result = run([str(sample_pdf), "1", "--model", "claude-opus-4-6"])
         assert result == 0
         call_kwargs = mock_stream.call_args[1]
         assert call_kwargs["model"] == "claude-opus-4-6"
 
-    @patch("arche.cli.stream_explanation")
+    @patch("chalk.cli.stream_explanation")
     def test_custom_prompt(self, mock_stream: MagicMock, sample_pdf: Path) -> None:
         result = run([str(sample_pdf), "1", "--prompt", "Summarize."])
         assert result == 0
         call_kwargs = mock_stream.call_args[1]
         assert call_kwargs["user_prompt"] == "Summarize."
 
-    @patch("arche.cli.stream_explanation")
+    @patch("chalk.cli.stream_explanation")
     def test_custom_max_tokens(self, mock_stream: MagicMock, sample_pdf: Path) -> None:
         result = run([str(sample_pdf), "1", "--max-tokens", "4096"])
         assert result == 0

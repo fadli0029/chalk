@@ -12,7 +12,7 @@ from pathlib import Path
 
 import pymupdf
 
-from arche.pdf import extract_pages_as_png, parse_page_spec
+from chalk.pdf import extract_pages_as_png, parse_page_spec
 
 
 def extract_to_dir(
@@ -70,7 +70,7 @@ def extract_to_dir(
 
 def _build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        prog="arche.extract",
+        prog="chalk.extract",
         description="Extract PDF pages as PNG files.",
     )
     parser.add_argument(
@@ -112,9 +112,9 @@ def run_extract(argv: list[str] | None = None) -> int:
         except ValueError:
             sys.stderr.write(f"Error: cleanup path must be inside {tmp_root}\n")
             return 1
-        if not resolved.name.startswith("arche-slides-"):
+        if not resolved.name.startswith("chalk-slides-"):
             sys.stderr.write(
-                "Error: cleanup path must be an arche-slides-* directory\n"
+                "Error: cleanup path must be an chalk-slides-* directory\n"
             )
             return 1
         try:
@@ -128,7 +128,7 @@ def run_extract(argv: list[str] | None = None) -> int:
     output_dir: Path | None = args.output_dir
 
     if output_dir is None:
-        output_dir = Path(tempfile.mkdtemp(prefix="arche-slides-"))
+        output_dir = Path(tempfile.mkdtemp(prefix="chalk-slides-"))
 
     try:
         paths = extract_to_dir(pdf_path, args.pages, output_dir)
@@ -144,7 +144,7 @@ def run_extract(argv: list[str] | None = None) -> int:
 
 
 def _main() -> None:
-    """Entry point for the arche-extract CLI."""
+    """Entry point for the chalk-extract CLI."""
     sys.exit(run_extract())
 
 

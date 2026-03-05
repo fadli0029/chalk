@@ -1,5 +1,5 @@
 [project]
-name = "arche"
+name = "chalk"
 version = "0.1.0"
 description = "Explains lecture slides using Claude. For when you have the slides but not the lecture."
 readme = "README.md"
@@ -25,12 +25,12 @@ dependencies = [
 ]
 
 [project.urls]
-Repository = "https://github.com/fadli0029/arche"
-Issues = "https://github.com/fadli0029/arche/issues"
+Repository = "https://github.com/fadli0029/chalk"
+Issues = "https://github.com/fadli0029/chalk/issues"
 
 [project.scripts]
-arche = "arche:main"
-arche-extract = "arche.extract:_main"
+chalk = "chalk:main"
+chalk-extract = "chalk.extract:_main"
 
 [build-system]
 requires = ["uv_build>=0.9.16,<0.10.0"]
@@ -115,7 +115,7 @@ max-args = 8
 max-returns = 7
 
 [tool.ruff.lint.isort]
-known-first-party = ["arche"]
+known-first-party = ["chalk"]
 
 [tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401", "F403"]

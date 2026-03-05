@@ -1,11 +1,11 @@
-"""Tests for arche.llm module."""
+"""Tests for chalk.llm module."""
 
 from __future__ import annotations
 
 import base64
 from unittest.mock import MagicMock, patch
 
-from arche.llm import build_content_blocks, stream_explanation
+from chalk.llm import build_content_blocks, stream_explanation
 
 
 class TestBuildContentBlocks:
@@ -41,7 +41,7 @@ class TestBuildContentBlocks:
 
 
 class TestStreamExplanation:
-    @patch("arche.llm.anthropic.Anthropic")
+    @patch("chalk.llm.anthropic.Anthropic")
     def test_streams_text_to_stdout(
         self, mock_anthropic_cls: MagicMock, capsys: MagicMock
     ) -> None:
@@ -66,7 +66,7 @@ class TestStreamExplanation:
         assert call_kwargs["max_tokens"] == 8192
         assert call_kwargs["system"] == "You are a prof."
 
-    @patch("arche.llm.anthropic.Anthropic")
+    @patch("chalk.llm.anthropic.Anthropic")
     def test_custom_model_and_tokens(self, mock_anthropic_cls: MagicMock) -> None:
         mock_client = MagicMock()
         mock_anthropic_cls.return_value = mock_client

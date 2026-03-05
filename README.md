@@ -1,4 +1,4 @@
-# arche
+# chalk
 
 When self-studying university courses (e.g. CMU 15-411, MIT 6.1810), you often
 get lecture slides but no lecture videos. The slides alone are rarely
@@ -7,7 +7,7 @@ as standalone reading material. So you scroll through a PDF, hit a slide you
 don't understand, and have no way to hear the explanation that was supposed to
 go with it.
 
-arche fills that gap. Point it at a lecture PDF, tell it which slides you're
+chalk fills that gap. Point it at a lecture PDF, tell it which slides you're
 stuck on, and it generates a professor-style explanation. It reads all prior
 slides for context (not just the ones you asked about), so it understands the
 narrative arc of the lecture before explaining your target slides.
@@ -46,10 +46,10 @@ For terminal use without Claude Code. Requires an
 ```sh
 export ANTHROPIC_API_KEY="sk-ant-..."
 
-arche lecture.pdf 15
-arche lecture.pdf 3-7
-arche lecture.pdf 1,3,5
-arche lecture.pdf 1-3,5,7-9
+chalk lecture.pdf 15
+chalk lecture.pdf 3-7
+chalk lecture.pdf 1,3,5
+chalk lecture.pdf 1-3,5,7-9
 ```
 
 The CLI sends all slides from page 1 through your last requested page to
@@ -66,8 +66,8 @@ Options:
 Examples:
 
 ```sh
-arche lecture.pdf 12 --prompt "Summarize the key equations on this slide."
-arche lecture.pdf 1-10 --max-tokens 16384
+chalk lecture.pdf 12 --prompt "Summarize the key equations on this slide."
+chalk lecture.pdf 1-10 --max-tokens 16384
 ```
 
 ## Installation
@@ -76,19 +76,19 @@ Requires Python 3.12+.
 
 ```sh
 # From GitHub
-uv tool install git+https://github.com/fadli0029/arche.git
+uv tool install git+https://github.com/fadli0029/chalk.git
 
 # Or from a local clone
-git clone https://github.com/fadli0029/arche.git
-cd arche
+git clone https://github.com/fadli0029/chalk.git
+cd chalk
 uv tool install .
 ```
 
 ## Development
 
 ```sh
-git clone https://github.com/fadli0029/arche.git
-cd arche
+git clone https://github.com/fadli0029/chalk.git
+cd chalk
 uv sync
 
 # Run quality checks

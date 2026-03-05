@@ -1,4 +1,4 @@
-"""Tests for arche.extract module."""
+"""Tests for chalk.extract module."""
 
 from __future__ import annotations
 
@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pytest
 
-from arche.extract import extract_to_dir, run_extract
+from chalk.extract import extract_to_dir, run_extract
 
 PNG_MAGIC = b"\x89PNG\r\n\x1a\n"
 
@@ -71,11 +71,11 @@ class TestRunExtract:
         assert result == 0
         captured = capsys.readouterr()
         lines = captured.out.strip().split("\n")
-        assert "arche-slides-" in lines[0]
+        assert "chalk-slides-" in lines[0]
         shutil.rmtree(lines[0], ignore_errors=True)
 
     def test_cleanup(self, sample_pdf: Path) -> None:
-        target = Path(tempfile.mkdtemp(prefix="arche-slides-"))
+        target = Path(tempfile.mkdtemp(prefix="chalk-slides-"))
         (target / "file.txt").write_text("data")
 
         result = run_extract([str(sample_pdf), "1", "--cleanup", str(target)])
@@ -91,7 +91,7 @@ class TestRunExtract:
         assert result == 1
         assert target.exists()
 
-    def test_cleanup_rejects_non_arche_temp_dir(self, sample_pdf: Path) -> None:
+    def test_cleanup_rejects_non_chalk_temp_dir(self, sample_pdf: Path) -> None:
         target = Path(tempfile.mkdtemp(prefix="other-"))
         try:
             result = run_extract([str(sample_pdf), "1", "--cleanup", str(target)])

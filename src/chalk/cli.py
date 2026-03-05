@@ -1,4 +1,4 @@
-"""Command-line interface for arche."""
+"""Command-line interface for chalk."""
 
 from __future__ import annotations
 
@@ -11,15 +11,15 @@ from pathlib import Path
 
 import pymupdf
 
-from arche.llm import stream_explanation
-from arche.pdf import extract_pages_as_png, parse_page_spec
-from arche.prompt import DEFAULT_SYSTEM_PROMPT
+from chalk.llm import stream_explanation
+from chalk.pdf import extract_pages_as_png, parse_page_spec
+from chalk.prompt import DEFAULT_SYSTEM_PROMPT
 
 
 def build_parser() -> argparse.ArgumentParser:
-    """Build the argument parser for arche."""
+    """Build the argument parser for chalk."""
     parser = argparse.ArgumentParser(
-        prog="arche",
+        prog="chalk",
         description="Explain lecture slides using Claude's vision API.",
     )
     parser.add_argument(
@@ -53,7 +53,7 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def run(argv: list[str] | None = None) -> int:
-    """Run the arche CLI. Returns 0 on success, 1 on user error, 2 on API error."""
+    """Run the chalk CLI. Returns 0 on success, 1 on user error, 2 on API error."""
     parser = build_parser()
     args = parser.parse_args(argv)
 

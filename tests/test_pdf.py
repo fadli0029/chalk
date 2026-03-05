@@ -1,4 +1,4 @@
-"""Tests for arche.pdf module."""
+"""Tests for chalk.pdf module."""
 
 from __future__ import annotations
 
@@ -9,7 +9,7 @@ import pytest
 if TYPE_CHECKING:
     from pathlib import Path
 
-from arche.pdf import extract_pages_as_png, parse_page_spec
+from chalk.pdf import extract_pages_as_png, parse_page_spec
 
 
 class TestParsePageSpec:

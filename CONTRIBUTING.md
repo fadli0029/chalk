@@ -1,4 +1,4 @@
-# Contributing to arche
+# Contributing to chalk
 
 ## Prerequisites
 
@@ -8,8 +8,8 @@
 ## Setup
 
 ```sh
-git clone https://github.com/fadli0029/arche.git
-cd arche
+git clone https://github.com/fadli0029/chalk.git
+cd chalk
 uv sync
 ```
 
