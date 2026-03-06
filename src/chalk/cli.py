@@ -5,6 +5,7 @@ from __future__ import annotations
 __all__ = ["build_parser", "run"]
 
 import argparse
+import importlib.metadata
 import importlib.resources
 import os
 import shutil
@@ -36,6 +37,11 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="chalk",
         description="Explain lecture slides using Claude's vision API.",
+    )
+    parser.add_argument(
+        "--version",
+        action="version",
+        version=f"%(prog)s {importlib.metadata.version('chalk-pypi')}",
     )
     parser.add_argument(
         "--install-skill",
