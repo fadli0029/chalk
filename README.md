@@ -36,13 +36,6 @@ To make `/slides` available:
 chalk --install-skill
 ```
 
-Or, if working from a local clone:
-
-```sh
-mkdir -p ~/.claude/skills/slides
-cp skills/slides/SKILL.md ~/.claude/skills/slides/SKILL.md
-```
-
 ### Standalone CLI
 
 For terminal use without Claude Code. Requires an
