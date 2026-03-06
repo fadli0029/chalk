@@ -12,6 +12,27 @@ stuck on, and it generates a professor-style explanation. It reads all prior
 slides for context (not just the ones you asked about), so it understands the
 narrative arc of the lecture before explaining your target slides.
 
+## Why not just attach the PDF or screenshot the slides?
+
+You could, but it's more friction than it looks.
+
+**Screenshotting slides manually** means opening the PDF, navigating to each
+page, taking a screenshot, and dragging it into a chat. For a single slide
+that's fine. For slides 5 through 20, it's tedious. And you'd also need to
+include the earlier slides for context, which you probably wouldn't think to
+do.
+
+**Attaching the PDF directly** works for text-heavy documents, but lecture
+slides are visual artifacts. Diagrams, figures, equations in specific layouts,
+color-coded code snippets, annotated graphs: these are designed to be seen as
+rendered images, not parsed as PDF text. When Claude reads a PDF as a document,
+it processes the text layer. When it sees the slides as images, it processes
+what the professor actually put on screen.
+
+chalk handles both problems. It renders each page as a high-resolution PNG,
+automatically includes all prior slides as context, and sends them to Claude's
+vision API in one call. You type one command; it does the rest.
+
 ## Two ways to use it
 
 ### Claude Code (recommended)
