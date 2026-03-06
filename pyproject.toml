@@ -1,6 +1,6 @@
 [project]
 name = "chalk-pypi"
-version = "0.2.2"
+version = "0.3.0"
 description = "Explains lecture slides using Claude. For when you have the slides but not the lecture."
 readme = "README.md"
 license = "MIT"
