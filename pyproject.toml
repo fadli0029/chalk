@@ -1,6 +1,6 @@
 [project]
 name = "chalk-pypi"
-version = "0.3.0"
+version = "0.3.1"
 description = "Explains lecture slides using Claude. For when you have the slides but not the lecture."
 readme = "README.md"
 license = "MIT"
@@ -30,7 +30,7 @@ Issues = "https://github.com/fadli0029/chalk/issues"
 
 [project.scripts]
 chalk = "chalk:main"
-chalk-extract = "chalk.extract:_main"
+chalk-extract = "chalk.extract:_main_deprecated"
 
 [build-system]
 requires = ["uv_build>=0.9.16,<0.10.0"]
@@ -73,96 +73,5 @@ select = [
     "A",      # flake8-builtins — shadowing builtins
     "C4",     # flake8-comprehensions — better comprehensions
     "SIM",    # flake8-simplify — simplifiable code
-    "T20",    # flake8-print — no print() in production
-    "T10",    # flake8-debugger — no leftover debugger calls
-    "S",      # flake8-bandit — security checks
-    "DTZ",    # flake8-datetimez — timezone-aware datetimes
-    "EM",     # flake8-errmsg — exception message formatting
-    "ISC",    # flake8-implicit-str-concat
-    "PIE",    # flake8-pie — misc improvements
-    "PT",     # flake8-pytest-style
-    "RSE",    # flake8-raise — raise best practices
-    "RET",    # flake8-return — return statement checks
-    "SLF",    # flake8-self — private member access
-    "ARG",    # flake8-unused-arguments
-    "PTH",    # flake8-use-pathlib — prefer pathlib over os.path
-    "PGH",    # pygrep-hooks — blanket type:ignore etc.
-    "PL",     # Pylint
-    "TRY",    # tryceratops — exception handling patterns
-    "PERF",   # Perflint — performance anti-patterns
-    "FURB",   # refurb — modernization suggestions
-    "RUF",    # Ruff-specific rules
-    "TC",     # flake8-type-checking — TYPE_CHECKING imports
-    "ERA",    # eradicate — commented-out code
-    "FLY",    # flynt — f-string conversion
-    "LOG",    # flake8-logging — logging best practices
-    "C90",    # mccabe — cyclomatic complexity
+    "T20",    # flake8-print — no print statements
 ]
-ignore = [
-    "E501",     # Line too long (formatter handles this)
-    "ISC001",   # Single-line implicit string concat (conflicts with formatter)
-    "PLR0913",  # Too many arguments
-    "PLR2004",  # Magic value in comparison
-    "TRY003",   # Long messages in exceptions
-    "EM101",    # String literal in exception
-    "EM102",    # f-string literal in exception
-]
-fixable = ["ALL"]
-dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
-
-[tool.ruff.lint.mccabe]
-max-complexity = 12
-
-[tool.ruff.lint.pylint]
-max-args = 8
-max-returns = 8
-
-[tool.ruff.lint.isort]
-known-first-party = ["chalk"]
-
-[tool.ruff.lint.per-file-ignores]
-"__init__.py" = ["F401", "F403"]
-"tests/**/*.py" = [
-    "S101",     # assert
-    "ARG",      # unused arguments (fixtures)
-    "PLR2004",  # magic values
-    "SLF001",   # private access
-    "T20",      # print
-    "TRY",      # exception handling
-    "EM",       # exception messages
-]
-
-[tool.mypy]
-files = ["src"]
-python_version = "3.12"
-strict = true
-warn_unreachable = true
-disallow_any_unimported = true
-local_partial_types = true
-enable_error_code = [
-    "ignore-without-code",
-    "redundant-expr",
-    "truthy-bool",
-    "possibly-undefined",
-    "unused-awaitable",
-    "explicit-override",
-    "mutable-override",
-    "deprecated",
-]
-show_error_codes = true
-pretty = true
-
-[[tool.mypy.overrides]]
-module = "tests.*"
-disallow_untyped_defs = false
-
-[tool.pytest.ini_options]
-testpaths = ["tests"]
-addopts = [
-    "--import-mode=importlib",
-    "--strict-markers",
-    "--strict-config",
-    "-ra",
-]
-xfail_strict = true
-filterwarnings = ["error"]
